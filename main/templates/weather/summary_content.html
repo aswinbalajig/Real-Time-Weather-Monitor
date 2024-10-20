@@ -1,0 +1,62 @@
+
+{% if summaries %}
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div id="alertDown">
+            {% for alert in alert_string %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ alert }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for summary in summaries %}
+            <div class="col-md-4 mb-4"> <!-- Each card now occupies one-third of the row on medium screens -->
+                <div class="card shadow-0 border">
+                    <div class="card-body p-4">
+                        <h4 class="mb-1 sfw-normal">{{ summary.city }}</h4>
+
+                        {% if summary.current_weather %}
+                            <p class="mb-2">Current temperature: <strong>{{ summary.current_weather.temp }}</strong></p>
+                            <p>Feels like: <strong>{{ summary.current_weather.feels_like }}</strong></p>
+                            <div class="d-flex flex-row align-items-center">
+                                <p class="mb-0 me-4"><strong> {{ summary.current_weather.main }} </strong></p>
+                                {% if summary.current_weather.main == "Clear" %}
+                                    <i class="fas fa-sun fa-3x" style="color: #FFD700;"></i> <!-- Sunny icon -->
+                                {% elif summary.current_weather.main == "Clouds" %}
+                                    <i class="fas fa-cloud fa-3x" style="color: #B0C4DE;"></i> <!-- Cloudy icon -->
+                                {% elif summary.current_weather.main == "Rain" %}
+                                    <i class="fas fa-cloud-rain fa-3x" style="color: #6495ED;"></i> <!-- Rainy icon -->
+                                {% elif summary.current_weather.main == "Snow" %}
+                                    <i class="fas fa-snowflake fa-3x" style="color: #00BFFF;"></i> <!-- Snowy icon -->
+                                {% elif summary.current_weather.main == "Thunderstorm" %}
+                                    <i class="fas fa-bolt fa-3x" style="color: #FF4500;"></i> <!-- Thunderstorm icon -->
+                                {% else %}
+                                    <i class="fas fa-cloud fa-3x" style="color: #ccc;"></i> <!-- Default cloudy icon -->
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p>No current weather data available.</p>
+                        {% endif %}
+
+                        <p>Max: <strong>{{ summary.max_temp }}</strong>, Min: <strong>{{ summary.min_temp }}</strong></p>
+                        <p>Average: <strong>{{ summary.avg_temp }}</strong></p>
+                        <p>Dominant_condition :<strong> {{ summary.dominant_condition }}</strong></p>
+                        <p>Date and Time : {{currentTime}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{% else %}
+    <p>No weather summaries available.</p>
+{% endif %}
+
