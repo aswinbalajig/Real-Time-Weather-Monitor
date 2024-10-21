@@ -191,5 +191,7 @@ run the background tasks in another seperate terminal:
 ```bash
 python manage.py run_weather_tasks
 ```
-**check pipfile for all dependencies , change the versions if you want for compatability**
+10. **Start the Application**
+    **run http://127.0.0.1:8000/summary/ on browser**
+***check pipfile for all dependencies , change the versions if you want for compatability***
 
